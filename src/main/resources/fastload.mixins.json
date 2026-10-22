@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "io.github.bumblesoftware.fastload.mixin.compat.v1211",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "MinecraftServerMixin"
+  ],
+  "client": [
+    "MinecraftClientAccessor",
+    "MinecraftClientMixin",
+    "ClientPlayNetworkHandlerMixin",
+    "ClientCommonNetworkHandlerMixin",
+    "ClientPlayerEntityMixin",
+    "FrustumMixin",
+    "GameRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

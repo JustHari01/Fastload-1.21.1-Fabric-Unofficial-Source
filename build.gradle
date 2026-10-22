@@ -1,0 +1,71 @@
+plugins {
+    id 'fabric-loom' version '1.7.4'
+    id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+base {
+    archivesName = project.archives_base_name
+}
+
+repositories {
+    maven { url = 'https://maven.terraformersmc.com/releases/' }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modCompileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
+}
+
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('fabric.mod.json') {
+        expand 'version': project.version
+    }
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+    withSourcesJar()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21
+}
+
+jar {
+    from('LICENSE') {
+        rename { 'LICENSE_Fastload_Unofficial' }
+    }
+}
+
+tasks.named('sourcesJar') {
+    from('LICENSE') {
+        rename { 'LICENSE_Fastload_Unofficial' }
+    }
+    from('README.md')
+}
+
+tasks.register('sourceBundle', Zip) {
+    archiveClassifier = 'source-code'
+    from('src/main/java') {
+        into('src/main/java')
+    }
+    from('src/main/resources') {
+        into('src/main/resources')
+    }
+    from('build.gradle', 'gradle.properties', 'settings.gradle', 'gradlew', 'gradlew.bat')
+    from('gradle/wrapper') {
+        into('gradle/wrapper')
+    }
+    from('LICENSE')
+    from('README.md')
+}
+
+tasks.named('build') {
+    dependsOn tasks.named('sourceBundle')
+}

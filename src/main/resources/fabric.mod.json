@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "fastload",
+  "version": "${version}",
+  "name": "Fastload Unofficial",
+  "description": "Unofficial 1.21.1 Fabric port of Fastload. GPL-3.0-only.",
+  "authors": [
+    "StockiesLad",
+    "JoostMSoftware",
+    "AbdElAziz333",
+    "kennytv",
+    "VidTu",
+    "JustHari01 (port)"
+  ],
+  "license": "GPL-3.0-only",
+  "icon": "assets/fastload/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["io.github.bumblesoftware.fastload.init.Fastload"],
+    "client": ["io.github.bumblesoftware.fastload.init.FastloadClient"],
+    "modmenu": ["io.github.bumblesoftware.fastload.compat.modmenu.FastloadModMenuIntegration"]
+  },
+  "mixins": ["fastload.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.16.14",
+    "minecraft": "1.21.1",
+    "java": ">=21"
+  },
+  "suggests": {
+    "modmenu": ">=11.0.3"
+  },
+  "breaks": {
+    "forcecloseloadingscreen": "*",
+    "ksyxis": "*"
+  }
+}
